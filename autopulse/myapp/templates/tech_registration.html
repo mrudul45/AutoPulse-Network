@@ -19,12 +19,12 @@
 <center>
     <h2><font color="#366092"><br><b>Technician Register </b></font></h2>
     <div class="container">
-	<form name="frm" role="form" action="/medicalshop_registration" method="post" >
+	<form name="frm" role="form" action="/tech_registration" method="post" >
         {% csrf_token %}
          <div class="form-group">
-			 <label for="sname"><br><b>Name</b></label>
-				<input class="form-control custom-input" type="text" id="mname" name="mname" placeholder="Name" required="required">
-            <br><input class="form-control custom-input" type="text" id="sname" name="sname" placeholder="Shopname" required="required">
+			 <label for="tname"><br><b>Name</b></label>
+				<input class="form-control custom-input" type="text" id="tname" name="tname" placeholder="Name" required="required">
+
 		 </div>
 
 	     <div class="form-group">
@@ -42,22 +42,6 @@
 			 <label for="email"><b>Email</b></label>
 			 <input class="form-control custom-input" type="email" id="email" name="email" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9]+.com*" placeholder="Enter email id"  required="required"></td>
 		 </div>
-		<div class="form-group">
-			 <label for="lat"><b>Latitude</b></label>
-			    <input class="form-control custom-input" type="number" id="lat" name="lat" placeholder="Latitude" ><br>
-		</div>
-		<div class="form-group">
-			 <label for="long"><b>Longitude</b></label>
-			    <input class="form-control custom-input" type="number" id="long" name="long" placeholder="Longitude" ><br>
-		</div>
-		<div class="form-group">
-			 <label><b>Opens On</b></label>
-			    <input class="form-control custom-input" type="time"  name="opent" placeholder="" ><br>
-		</div>
-		<div class="form-group">
-			 <label><b>Closes On</b></label>
-			    <input class="form-control custom-input" type="time"  name="closet" placeholder="" ><br>
-		</div>
 		<div class="form-group">
 			 <label for="uname"><b>User Name</b></label>
 			    <input class="form-control custom-input" type="text" id="uname" name="uname" placeholder="Username" ><br>
@@ -78,7 +62,7 @@
         <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
         {{msg}}
         <br>
-                <a href="/medicalshop_login"><br>Already Registered? Login</a></h1><br><br>
+                <a href="/tech_login"><br>Already Registered? Login</a></h1><br><br>
     </form>
 	</div>
 </center>

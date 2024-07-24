@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopulse Network - User Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #7a915e;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #7a915e;
+        }
+
+        .navbar-brand span.autopulse {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-brand span.network {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item.form-inline {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-item.form-inline input {
+            width: 200px;
+        }
+
+        .navbar-nav .nav-item.dropdown {
+            margin-left: 10px;
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        .card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        /* Custom styles for product card fields */
+        .card-title {
+            background-color: #4285f4; /* Blue color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-specification {
+            background-color: #34a853; /* Green color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-manufacturer {
+            background-color: #ea4335; /* Red color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-price {
+            background-color: #fbbc05; /* Yellow color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn-buy, .btn-remove {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-remove {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/index">
+            <span class="autopulse">AUTOPULSE</span>
+            <span class="network">NETWORK</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item form-inline">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Technicians</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!-- ... (same as before) ... -->
+
+ <h2>Your Cart</h2>
+
+    {% if cart_items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                    <tr>
+                        <td>{{ cart_item.product.product_name }}</td>
+                        <td>{{ cart_item.quantity }}</td>
+                        <td>{{ cart_item.product.price }}</td>
+                        <td>{{ cart_item.quantity * cart_item.product.price }}</td>
+                        <td>
+                            <a href="{% url 'products:product_detail' pk=cart_item.product.pk %}">View Details</a> |
+                            <a href="#">Remove</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <button class="btn-buy">Buy Now</button>
+            <button class="btn-remove">Remove Selected</button>
+        </div>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+
+    <a href="{% url 'products:product_list' %}">Back to Product List</a>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFD"></script>
+</body>
+
+</html>

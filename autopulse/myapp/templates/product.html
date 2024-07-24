@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopulse Network - User Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #7a915e;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #7a915e;
+        }
+
+        .navbar-brand span.autopulse {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-brand span.network {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item.form-inline {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-item.form-inline input {
+            width: 200px;
+        }
+
+        .navbar-nav .nav-item.dropdown {
+            margin-left: 10px;
+        }
+
+        .card {
+            height: 100%;
+        }
+
+        .card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        /* Custom styles for product card fields */
+        .card-title {
+            background-color: #4285f4; /* Blue color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-specification {
+            background-color: #34a853; /* Green color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-manufacturer {
+            background-color: #ea4335; /* Red color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+
+        .card-price {
+            background-color: #fbbc05; /* Yellow color */
+            color: white;
+            padding: 5px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/index">
+            <span class="autopulse">AUTOPULSE</span>
+            <span class="network">NETWORK</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item form-inline">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/technicians">Technicians</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!-- ... (same as before) ... -->
+
+    <div class="container mt-5">
+
+        <h2>Products Details:</h2>
+
+        <div class="row bg-light p-4 rounded shadow">
+
+            <div class="col-sm-6 p-3 text-dark">
+                <h2 class="text-uppercase">{{ products.product_name }}</h2>
+                    <img src="{{ products.product_image.url }}" class="rounded" alt="{{ products.product_name }}">
+
+                   <p>Product Name: {{ products.product_name }}</p>
+                   <p>Product Specification: {{ products.product_specification }}</p>
+                   <p>Manufacturer: {{ products.manufacture_name }}</p>
+                   <p>Price: {{ products.price }}</p>
+                   <p>ShopName and Details: <br>
+                       Name: {{ product.shopkeeper.name }} <br>
+                       City: {{ product.shopkeeper.city }},{{ product.shopkeeper.place }} <br>
+                       Contact: {{ product.shopkeeper.name }} <br>
+                       Email: {{ product.shopkeeper.name }} <br>
+
+                   </p>
+                <div class="row">
+                    <form method="post" class="form-row">
+                        {% csrf_token %}
+                    <input type="hidden" name="reqid" value="{{ product.id }}">
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control sm-4" required name="qty" id="qty">
+                        </div>
+                        <div class="col-sm-9">
+                            <button class="btn btn-info">Add to Cart</button>
+                            <!-- <button class="btn btn-warning">Buy Now</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFD"></script>
+</body>
+
+</html>

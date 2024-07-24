@@ -1,5 +1,110 @@
-{% extends "base.html" %}
-{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopkeeper Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+                body {
+            background-color: #7a915e;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #7a915e;
+        }
+
+        .navbar-brand span.autopulse {
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-brand span.network {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item.form-inline {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .navbar-nav .nav-item.form-inline input {
+            width: 200px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .navbar-nav .nav-item.dropdown {
+            margin-left: 10px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .navbar-nav .nav-item.welcome-user {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+    </style>
+</head>
 
 
-{% endblock %}
+<body>
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/index">
+            <span class="autopulse">AUTOPULSE</span>
+            <span class="network">NETWORK</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item welcome-user">Welcome {{ user.username }}</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'addproduct' %}">Add Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'manage_products' %}">Manage Products</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="">Profile Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'shoplogout' %}">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Add Products Section -->
+            <div class="col-md-6">
+                <!-- ... (Same as before) -->
+            </div>
+
+            <!-- Manage Products Section -->
+            <div class="col-md-6">
+                <!-- ... (Same as before) -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script> <!-- Assuming script.js is in your static files -->
+</body>
+</html>

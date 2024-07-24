@@ -19,16 +19,17 @@
 <center>
     <h2><font color="#366092"><br><b>Shopkeeper Register</b></font></h2>
     <div class="container">
-	<form name="frm" role="form" action="/dealer_registration" method="post" >
+	<form name="frm" role="form" action="/shopkeeper_registration" method="post" >
         {% csrf_token %}
          <div class="form-group">
-			 <label for="fname"><br><b>Name</b></label>
-				<input class="form-control custom-input" type="text" id="dname" name="dname" placeholder="Name" required="required">
-            <br><input class="form-control custom-input" type="text"  name="aname" placeholder="Agency Name" required="required">
+			 <label for="oname"><br><b>Owner Name</b></label>
+				<input class="form-control custom-input" type="text" id="oname" name="oname" placeholder="Owner Name" required="required">
+			 <label for="sname"><br><b>Shop Name</b></label>
+				<input class="form-control custom-input" type="text" id="shname" name="shname" placeholder="Shop Name" required="required">
 		 </div>
 
 	     <div class="form-group">
-			 <label for="addr"><b>Address</b></label>
+			 <label for="place"><b>Address</b></label>
 			    <input class="form-control custom-input" type="text" id="place" name="place" placeholder="Place" ><br>
                 <input class="form-control custom-input" type="text" id="city" name="city" placeholder="City" ><br>
                 <input class="form-control custom-input" type="text" id="dist" name="dist" placeholder="District" ><br>
@@ -42,6 +43,26 @@
 			 <label for="email"><b>Email</b></label>
 			 <input class="form-control custom-input" type="email" id="email" name="email" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9]+.com*" placeholder="Enter email id"  required="required"></td>
 		 </div>
+
+        <div class="form-group">
+             <button type="button" class="btn btn-warning" onclick="getLocation()">Shop Geolocation <span class="required"></span></button>
+        </div>
+		<div class="form-group">-->
+			 <label for="latitude"><b>Latitude</b></label>-->
+			    <input class="form-control custom-input" type="number" id="latitude" name="latitude" placeholder="Latitude" step="any" ><br>-->
+		</div>-->
+		<div class="form-group">-->
+			 <label for="longitude"><b>Longitude</b></label>-->
+			    <input class="form-control custom-input" type="number" id="longitude" name="longitude" placeholder="Longitude" step="any" ><br>-->
+		</div>
+		<div class="form-group">
+			 <label><b>Opens On</b></label>
+			    <input class="form-control custom-input" type="time"  name="opent" placeholder="" ><br>
+		</div>
+		<div class="form-group">
+			 <label><b>Closes On</b></label>
+			    <input class="form-control custom-input" type="time"  name="closet" placeholder="" ><br>
+		</div>
 		<div class="form-group">
 			 <label for="uname"><b>User Name</b></label>
 			    <input class="form-control custom-input" type="text" id="uname" name="uname" placeholder="Username" ><br>
@@ -62,11 +83,10 @@
         <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
         {{msg}}
         <br>
-                <a href="/dealer_login"><br>Already Registered? Login</a></h1><br><br>
+                <a href="/shopkeeper_login"><br>Already Registered? Login</a></h1><br><br>
     </form>
 	</div>
 </center>
-</div>
 <!--      SCRIPT -->
       <script>
          function function1() {
@@ -77,9 +97,39 @@
     return false;
   }
 }
+
+function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+            alert("Location Fetched!!!");
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("latitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
       </script>
 <!--   END   SCRIPT -->
 
 </main><!-- End #main -->
-
 {% endblock %}

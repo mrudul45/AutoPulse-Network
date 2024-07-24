@@ -1,0 +1,74 @@
+{% extends "baseshopkeeper.html" %}
+
+{% block bdycl %}
+    {# No need to include body styling here #}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="form-container">
+            <h2 class="text-center mb-4">Add New Product</h2>
+
+            <form method="post" action="updateit" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="product_name">Product Name:</label>
+                    <input type="text" class="form-control" id="product_name" value="{{product.product_name}}" name="product_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_specification">Product Specification:</label>
+                    <textarea class="form-control" id="product_specification" content=""  name="product_specification" rows="4" required>{{product.product_specification}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="manufacture_name">Manufacture Name:</label>
+                    <input type="text" class="form-control" id="manufacture_name"  value="{{product.manufacture_name}}"  name="manufacture_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">&#8377;</span>
+                        </div>
+                        <input type="number" class="form-control" id="price" name="price"  value="{{product.price}}" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity"  value="{{product.quantity}}" name="quantity" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_image">Product Image:</label>
+                    <input type="file" class="form-control-file" id="product_image"   name="product_image" >
+                    <img src="{{product.product_image.url}}" width="40" height="40">
+                </div>
+                <div class="form-group">
+               <label for="status">Status:</label>
+             <select class="form-control" id="status" name="status"  value="{{product.status}}" required>
+        <option value="available">Available</option>
+        <option value="not_available">Not Available</option>
+    </select>
+</div>
+   <input name="id" value="{{product.id}}" hidden>
+                <button type="submit" class="btn btn-primary btn-block">updateproduct</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+        // Check if the product registration was successful
+        var productRegistrationSuccess = "{{ request.session.product_registration_success }}";
+
+        if (productRegistrationSuccess) {
+            // Display an alert box
+            alert("Product registration successful!");
+        }
+    </script>

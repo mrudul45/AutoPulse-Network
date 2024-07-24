@@ -16,6 +16,8 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from .views import RemoveProductView
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('index', views.index, name='index'),
@@ -28,9 +30,19 @@ urlpatterns = [
     path('shopkeeper_login', views.shopkeeper_login, name='shopkeeper_login'),
     path('tech_login', views.tech_login, name='tech_login'),
     path('admin_home', views.admin_home, name='admin_home'),
-    path('user_home', views.user_home, name='user_home'),
+    path('user_home/', views.user_home, name='user_home'),
     path('shopkeeper_home', views.shopkeeper_home, name='shopkeeper_home'),
     path('tech_home', views.tech_home, name='tech_home'),
     path('contact', views.contact, name='contact'),
-
+    path('addproduct/', views.addproduct, name="addproduct"),
+    path('manage-products/', views.manage_products, name="manage_products"),
+    path('shoplogout/', views.shoplogout, name='shoplogout'),
+    path('remove_product/', RemoveProductView.as_view(), name='remove_product'),
+    path('update_product/', views.updateproduct, name='update_product'),
+    path('updateit', views.updateit, name='updateit'),
+    path('productview/<int:pk>/', views.Productview, name='productview'),
+    path('cart/', views.view_cart, name='cart'),
+    path('technicians/', views.technicians, name='technicians'),
+    path('career/', views.career, name='career'),
+    path('userlogout', views.userlogout,name="userlogout"),
 ]
